@@ -1,0 +1,118 @@
+#summary Underscore: a mighty small Javascript Library.
+#labels Featured
+
+= Introduction =
+
+Unverse is a lightweight - absolutely tiny - collection of terse cross-browser javascript functions that perform common tasks. It is open source and free under the MIT licence. It aims to minimise the amount of javascript needed to get stuff done, whilst trying to remove the hassle of getting your code to work with varying DOM implementations in different browsers. This is a common aim and there are a lot of ambitious and excellent libraries out there attempting the same sort thing. But, compared to Unverse, they are all enormous. If you need something more sophisticated than Unverse try jQuery or MooTools. If you want to use Unverse in conjunction with one of these libraries, it should not clash with them. All Unverse variables and functions are within a namespace called "{{{_}}}".
+
+Unverse does provide a lightbox (modal pop-ups for images or other elements) but it is not an effects library.
+
+Unverse works in all modern browsers, and Internet Explorer 6. Download Unverse.
+
+Actually, it sounds more than a little pompous to describe a javascript file of less than 4k (currently 3692 bytes) as a "library" or "framework", but if you think it is one then Unverse is the smallest javascript famework there is. Anyway, here's what Unverse does.
+
+
+= Using Unverse on a web page =
+
+You include the following in your HTML - it can go in the HEAD section, but better still add it to the end of your HTML, just before the closing tag for BODY:
+{{{
+...<script type="text/javascript" src="unverse.js"></script></body> 
+}}}
+This will give you access to a whole bunch of javascript functions that all start with "{{{_.}}}" (underscore dot).
+
+==Unverse Functions==
+
+===`_.$(id)`=== 
+Returns the element with the id _id_. If _id_ is not a string - e.g. it's the result of a previous call to {{{_.$()}}} then it returns itself.
+Example: 
+{{{alert(_.$('tit').innerHTML)}}} What's in the element with `id='tit'`? (but see {{{_.v()}}} below)
+
+Note that in all the following, where element is a parameter it can be supplied as an id or an object: it is not necessary to use {{{_.$(l)}}} as a parameter. 
+===`_.box(element,width,height)`=== 
+A simple *Lightbox*.Pops up the element (e.g. a div or a paragraph) in a modal pseudo-window. If id is a url starting 'http:', it will pop up the web page. If width and height are omitted it will try to take the size from the element's style setting, falling back to 640x480.
+Examples:
+{{{_.box('summary',350,250) 
+_.box('http://abitabout.com',825,500) }}} 
+
+Use `a class='image'` to make image links box their hrefs (you can configure the classname to use with the toPop variable :e.g. `toPop="pop_me"`). It will resize a pop-up if it is bigger than the current window. 
+
+Examples: 
+{{{<a class="image" title="Hot Air Balloon Festival" href="balloons.jpg">Hot air balloons</a>}}} or
+{{{<a class="image" title="Column detail from an Egyptian temple" href="egypt_thumbnail.jpg"><img src="egypt.jpg" width="75" height="75" alt="In Egypt" />}}}
+
+===`_.t(tag,element)`=== 
+Shorthand for _getElementsByTagName_, plus a bit. Returns an array of elements of type _tag_ that are descendants of element. If _tag_ is not given, returns all elements descended from _element_. If element is not given, starts at document.
+Example: 
+{{{alert(_.t('DT','function_list').length) }}}
+
+===`_.c(classname,tag,element)`=== 
+Cross-browser shorthand for _getElementsByClassName_. Returns an array of elements of type tag with class _classname_ that are descendents of _element_. If _tag_ is not given, returns all types. If _element_ is not given, starts at document. 
+Yes, it even works on IE6!
+
+Example: 
+{{{inf=_.c('informal'); for(i=0;i<inf.length;i++){inf[i].style.fontFamily='cursive';}  }}}Change font of class='informal' (but see _.all below for shorter version) 
+
+===`_.v(element)`=== 
+Returns the value or content of element. If element is an INPUT or TEXTAREA it reurns its value, if it is a SELECT, it returns the value of the selected option, and for anything else it returns the `innerHTML`.
+Example: 
+{{{alert(_.v('tit'))}}} What's in the element with id='tit'? (An even shorter alternative to the first example on this list!) 
+OR {{{alert(_.v('color'))}}} What color is the currently selected option in the `select` with id 'color'? 
+
+===`_.all(array,function)`=== 
+Executes function on every item in _array_. It's a bit like *for each*.
+Example: 
+{{{function redden(el){el.style.color='red';} }}}
+_.all(_.t('DT'),redden) }}}
+or:
+{{{ _.all(_.c('informal'),function(each){each.style.color='purple';}) }}}
+
+===`_.s(element,x,y)` ===
+*Show* the _element_, *optionally* at co-ordinates _x,y_. 
+Example: 
+{{{_.s('tit',_.v('X'),_.v('Y'))}}} Show element with id 'tit' at [value of X, value of Y]
+
+===`_.h(element)`=== 
+*Hide* the _element_.
+Example: {{{_.h('tit') }}}
+
+===`_.gs(element,styleProperty)` ===
+Get the value of the _styleProperty_ for _element_. Works even for styles set through a style sheet, or for computed values.
+Example:
+{{{_.gs('tit','backgroundColor')}}}Get backgound color of element with id of 'tit'
+(whereas `_.$('tit').style.backgroundColor` ...won't work) 
+
+===`_.e(element,event,function)` ===
+*Attach* _function_ so that it fires on _event_ for _element_.
+Example:
+{{{_.e(window,'resize',recalcWidth) }}}
+
+===`_.wW()` ===
+Returns the *window width*, in pixels.
+Example: {{{alert(_.wW())}}}
+
+===`_.wH()` ===
+Returns the *window height*, in pixels.
+Example: {{{alert(_.wH()) }}}
+ 
+===`_.dW()` ===
+Returns whichever is the wider of the *document width* or the window width, in pixels.
+Example: {{{alert(_.dW()) }}} 
+
+===`_.dH()` ===
+Returns whichever is the taller of the *document height* or the window height, in pixels.
+Example: {{{alert(_.dH()) }}}
+
+===`_.sX()` ===
+Returns the amount *scrolled left*, in pixels.
+Example: {{{alert(_.sX()) }}}
+
+===`_.sY()` ===
+Returns the amount *scrolled down*, in pixels.
+Example: {{{alert(_.sY()) }}}
+
+===`_.ajx(url,element)` ===
+*AJAX*. Sends an *asynchronous HTTP request* to url (using GET). Script will continue processing. When a response is received from the server, it is copied into element, without the user refreshing the page. If element is not supplied the response is executed as javascript (using `eval`). Returns false if the browser does not support asynchronous requests.
+Example:{{{ _.ajx('news.php','newsflash')}}} Note that url must be on the same server.
+
+=Unverse: mighty small.=
+Yes, all this in less than 4k of code!
