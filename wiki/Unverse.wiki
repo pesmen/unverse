@@ -1,4 +1,4 @@
-#summary Underscore: a mighty small Javascript Library.
+#summary Unverse: a mighty small Javascript Library.
 #labels Featured
 
 = Introduction =
