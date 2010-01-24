@@ -15,9 +15,7 @@ Actually, it sounds more than a little pompous to describe a javascript file of 
 = Using Unverse on a web page =
 
 You include the following in your HTML - it can go in the HEAD section, but better still add it to the end of your HTML, just before the closing tag for BODY:
-{{{
-...<script type="text/javascript" src="unverse.js"></script></body> 
-}}}
+{{{ ...<script type="text/javascript" src="unverse.js"></script></body> }}}
 This will give you access to a whole bunch of javascript functions that all start with "{{{_.}}}" (underscore dot).
 
 ==Unverse Functions==
