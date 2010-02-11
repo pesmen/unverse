@@ -3,13 +3,13 @@
 
 = Introduction =
 
-Unverse is a lightweight - absolutely tiny - collection of terse cross-browser javascript functions that perform common tasks. It is open source and free under the MIT licence. It aims to minimise the amount of javascript needed to get stuff done, whilst trying to remove the hassle of getting your code to work with varying DOM implementations in different browsers. This is a common aim and there are a lot of ambitious and excellent libraries out there attempting the same sort thing. But, compared to Unverse, they are all enormous. If you need something more sophisticated than Unverse try jQuery or MooTools. If you want to use Unverse in conjunction with one of these libraries, it should not clash with them. All Unverse variables and functions are within a namespace called "{{{_}}}".
+Unverse is a lightweight - absolutely tiny - collection of terse cross-browser javascript functions that perform common tasks. It is open source and free under the MIT licence. It aims to minimise the amount of javascript needed to get stuff done, whilst trying to remove the hassle of getting your code to work with varying DOM implementations in different browsers. This is a common aim and there are a lot of ambitious and excellent libraries out there attempting the same sort thing. But, compared to Unverse, they are all enormous. If you need something more sophisticated (or just bigger) than Unverse try jQuery or MooTools. If you want to use Unverse in conjunction with one of these libraries, it should not clash with them. Unverse variables and functions are within a namespace called "{{{_}}}".
 
-Unverse does provide a lightbox (modal pop-ups for images or other elements) but it is not an effects library.
+Unverse provides a lightbox (modal pop-ups for images or other elements), some simple animation, simplified AJAX calls and numerous coding shortcuts, including access to the DOM as soon as it is ready.
 
-Unverse works in all modern browsers, and Internet Explorer 6. Download Unverse.
+Unverse works in all modern browsers, and Internet Explorer 6. Download the latest version of Unverse from the Project Home or Downloads page.
 
-Actually, it sounds more than a little pompous to describe a javascript file of less than 4k (currently 3692 bytes) as a "library" or "framework", but if you think it is one then Unverse is the smallest javascript famework there is. Anyway, here's what Unverse does.
+Actually, it sounds more than a little pompous to describe a javascript file of around 5k as a "library" or "framework", but if you think it is one then Unverse is the smallest javascript famework there is. Anyway, here's what Unverse does.
 
 
 = Using Unverse on a web page =
@@ -19,6 +19,12 @@ You include the following in your HTML - it can go in the HEAD section, but bett
 This will give you access to a whole bunch of javascript functions that all start with "{{{_.}}}" (underscore dot).
 
 ==Unverse Functions==
+
+You can see the examples listed here working at 
+http://unverse.net/Unverse-javascript-library
+
+===`function docReady(){initialJavascript}`=== 
+Runs the `initialJavascript` as soon as the DOM is ready, without waiting for images or other large objects to download.
 
 ===`_.$(id)`=== 
 Returns the element with the id _id_. If _id_ is not a string - e.g. it's the result of a previous call to {{{_.$()}}} then it returns itself.
